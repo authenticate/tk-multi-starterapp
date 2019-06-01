@@ -13,7 +13,6 @@
 # The path to output all built .py files to: 
 UI_PYTHON_PATH=../python/app/ui
 
-
 # Helper functions to build UI files
 function build_qt {
     echo " > Building " $2
@@ -33,6 +32,14 @@ function build_res {
     build_qt "pyside-rcc" "$1.qrc" "$1_rc"
 }
 
+function pause(){
+    read -p "$*"
+}
+
+#echo "$PATH"
+export PATH=$PATH:/c/Program\ Files/Shotgun/RV-7.3.1/bin
+export PATH=$PATH:/c/Program\ Files/Shotgun/Python
+#echo "$PATH"
 
 # build UI's:
 echo "building user interfaces..."
@@ -42,3 +49,5 @@ build_ui dialog
 # build resources
 echo "building resources..."
 build_res resources
+
+#pause 'Press [Enter] key to continue...'

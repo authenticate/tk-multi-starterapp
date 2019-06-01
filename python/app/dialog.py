@@ -21,7 +21,6 @@ from .ui.dialog import Ui_Dialog
 # standard toolkit logger
 logger = sgtk.platform.get_logger(__name__)
 
-
 def show_dialog(app_instance):
     """
     Shows the main dialog window.
@@ -32,15 +31,16 @@ def show_dialog(app_instance):
     
     # we pass the dialog class to this method and leave the actual construction
     # to be carried out by toolkit.
-    app_instance.engine.show_dialog("Starter Template App...", app_instance, AppDialog)
-    
-
+    app_instance.engine.show_dialog("Hello World - Starter Template App...", app_instance, AppDialog)
 
 class AppDialog(QtGui.QWidget):
     """
     Main application dialog window
     """
     
+    def hello_world(self):
+        logger.info("Pushing the button!")
+
     def __init__(self):
         """
         Constructor
@@ -51,20 +51,24 @@ class AppDialog(QtGui.QWidget):
         # now load in the UI that was created in the UI designer
         self.ui = Ui_Dialog() 
         self.ui.setupUi(self)
-        
+
+        self.ui.button_james_test.clicked.connect(self.hello_world)
+
         # most of the useful accessors are available through the Application class instance
         # it is often handy to keep a reference to this. You can get it via the following method:
         self._app = sgtk.platform.current_bundle()
-        
+
         # logging happens via a standard toolkit logger
-        logger.info("Launching Starter Application...")
-        
+        logger.info("Hello World - Launching Starter Application...")
+        logger.info("Hello World - James")
+
         # via the self._app handle we can for example access:
         # - The engine, via self._app.engine
         # - A Shotgun API instance, via self._app.shotgun
-        # - An Sgtk API instance, via self._app.sgtk 
-        
+        # - An Sgtk API instance, via self._app.sgtk
+
         # lastly, set up our very basic UI
-        self.ui.context.setText("Current Context: %s" % self._app.context)
-        
-        
+        self.ui.context.setText("Hello World - Current Context: %s" % self._app.context)
+
+
+
